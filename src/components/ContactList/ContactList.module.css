@@ -1,0 +1,11 @@
+.listEl {
+  margin-bottom: 10px;
+}
+
+.delBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+}

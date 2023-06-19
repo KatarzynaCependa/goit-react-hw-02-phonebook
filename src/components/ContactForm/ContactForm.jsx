@@ -29,7 +29,7 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={css.form}>
-        <label className={css.label}>
+        <label className={css.contactFormLabel}>
           Name
           <input
             type="text"
@@ -41,7 +41,7 @@ class ContactForm extends Component {
             onChange={this.handleInputChange}
           />{' '}
         </label>
-        <label className={css.label}>
+        <label className={css.contactFormLabel}>
           Number
           <input
             type="tel"

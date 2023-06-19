@@ -3,11 +3,19 @@ import React, { Component } from 'react';
 import css from 'components/App.module.css';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
+import Filter from 'components/Filter/Filter';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
     name: '',
+    number: '',
   };
 
   // przyjmuję (name i number) jako argumenty
@@ -34,6 +42,15 @@ export class App extends Component {
     }));
   };
 
+  showFilteredContacts = () => {
+    // destrukturyzacja stanu komponentu App aby otrzymać dostęp do właściwości contacts (tablica kontaktów) i filter (tekst filtrowania)
+    const { contacts, filter } = this.state;
+    // metoda filter uruchomiona na tablicy contacts - zwraca nową tablicę z wynikami, które pasują do wartości input
+    return contacts.filter(cont =>
+      cont.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
   // contactId jako argument
   handleDeleteContact = contactId => {
     // prevState (poprzedni stan) jako argument
@@ -43,6 +60,12 @@ export class App extends Component {
     }));
   };
 
+  handleFilterChange = newValue => {
+    this.setState({
+      filter: newValue,
+    });
+  };
+
   render() {
     return (
       <>
@@ -50,9 +73,9 @@ export class App extends Component {
         {/* przekazujemy funkcję do props onSubmit */}
         <ContactForm onSubmit={this.addNewName} />
         <h2 className={css.header}>Contacts</h2>
-        {/* <Filter /> */}
+        <Filter onChange={this.handleFilterChange} />
         <ContactList
-          contacts={this.state.contacts}
+          contacts={this.showFilteredContacts()}
           onDeleteContact={this.handleDeleteContact}
         />
       </>

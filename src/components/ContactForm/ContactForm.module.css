@@ -7,7 +7,7 @@
   border: 1px solid black;
 }
 
-.label {
+.contactFormLabel {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
